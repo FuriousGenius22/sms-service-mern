@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { 
   MenuIcon, 
   BellIcon, 
-  SearchIcon, 
   UserIcon,
   SettingsIcon,
   LogOutIcon,
@@ -17,7 +16,6 @@ interface AppHeaderProps {
 }
 
 export function AppHeader({ onMenuClick }: AppHeaderProps) {
-  const [searchOpen, setSearchOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -37,8 +35,8 @@ export function AppHeader({ onMenuClick }: AppHeaderProps) {
       </div>
 
       <div className="relative h-full px-4 lg:px-6 flex items-center justify-between gap-4">
-        {/* Left: Menu button + Logo + Search */}
-        <div className="flex items-center gap-4 flex-1">
+        {/* Left: Menu button + Logo */}
+        <div className="flex items-center gap-4">
           <button
             onClick={onMenuClick}
             className="lg:hidden p-2.5 hover:bg-white/[0.05] rounded-xl transition-colors border border-white/[0.06]"
@@ -54,31 +52,10 @@ export function AppHeader({ onMenuClick }: AppHeaderProps) {
               className="h-12 w-auto group-hover:scale-105 transition-transform"
             />
           </Link>
-
-          {/* Search - Desktop */}
-          <div className="hidden md:block flex-1 max-w-xl">
-            <div className="relative group">
-              <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-indigo-400 transition-colors" />
-              <input
-                type="text"
-                placeholder="Search anything..."
-                className="w-full pl-11 pr-4 py-2.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.05] transition-all"
-              />
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/0 via-indigo-500/0 to-pink-500/0 group-focus-within:from-indigo-500/10 group-focus-within:via-pink-500/5 group-focus-within:to-pink-500/10 pointer-events-none transition-all" />
-            </div>
-          </div>
         </div>
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2">
-          {/* Mobile search toggle */}
-          <button
-            onClick={() => setSearchOpen(!searchOpen)}
-            className="md:hidden p-2.5 hover:bg-white/[0.05] rounded-xl transition-colors border border-white/[0.06]"
-            aria-label="Search"
-          >
-            <SearchIcon className="w-5 h-5 text-gray-300" />
-          </button>
 
           {/* Notifications */}
           <div className="relative">
@@ -194,30 +171,6 @@ export function AppHeader({ onMenuClick }: AppHeaderProps) {
           </div>
         </div>
       </div>
-
-      {/* Mobile search dropdown */}
-      <AnimatePresence>
-        {searchOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-[#06080f]/95 backdrop-blur-xl border-b border-white/[0.06] overflow-hidden"
-          >
-            <div className="p-4">
-              <div className="relative">
-                <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                <input
-                  type="text"
-                  placeholder="Search anything..."
-                  className="w-full pl-11 pr-4 py-2.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-indigo-500/50"
-                  autoFocus
-                />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
 }
