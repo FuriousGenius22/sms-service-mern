@@ -1,16 +1,18 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { MainLayout } from "@/layouts/MainLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
-import { DashboardLayout } from "@/layouts/DashboardLayout";
+import { AppLayout } from "@/layouts/AppLayout";
 import HomePage from "@/pages/HomePage";
 import { BlogListPage } from "@/pages/blog/BlogListPage";
 import { BlogPostPage } from "@/pages/blog/BlogPostPage";
 import { LoginPage } from "@/pages/auth/LoginPage";
 import { RegisterPage } from "@/pages/auth/RegisterPage";
 import { ForgotPasswordPage } from "@/pages/auth/ForgotPasswordPage";
-import { DashboardPage } from "@/pages/dashboard/DashboardPage";
-import { ProfilePage } from "@/pages/dashboard/ProfilePage";
-import { SettingsPage } from "@/pages/dashboard/SettingsPage";
+import { OverviewPage } from "@/pages/app/OverviewPage";
+import { VerificationPage } from "@/pages/app/VerificationPage";
+import { CreditsPage } from "@/pages/app/CreditsPage";
+import { SupportPage } from "@/pages/app/SupportPage";
+import { BlogPage } from "@/pages/app/BlogPage";
 import { ROUTES } from "@/constants/routes";
 
 /**
@@ -31,10 +33,12 @@ export function AppRoutes() {
         <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
       </Route>
 
-      <Route element={<DashboardLayout />}>
-        <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
-        <Route path={ROUTES.DASHBOARD_PROFILE} element={<ProfilePage />} />
-        <Route path={ROUTES.DASHBOARD_SETTINGS} element={<SettingsPage />} />
+      <Route path="/app" element={<AppLayout />}>
+        <Route path="overview" element={<OverviewPage />} />
+        <Route path="verification" element={<VerificationPage />} />
+        <Route path="credits" element={<CreditsPage />} />
+        <Route path="support" element={<SupportPage />} />
+        <Route path="blog" element={<BlogPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
