@@ -1,27 +1,27 @@
 import { motion } from "motion/react";
-
-const steps = [
-  {
-    number: "01",
-    title: "Choose a Number",
-    description:
-      "Select a virtual phone number from our inventory spanning 50+ countries. Numbers are provisioned instantly.",
-  },
-  {
-    number: "02",
-    title: "Send Verification",
-    description:
-      "Use our REST API to send an SMS verification code to any phone number. One simple API call is all it takes.",
-  },
-  {
-    number: "03",
-    title: "Receive the Code",
-    description:
-      "Get the verification code delivered in real-time via webhooks, or retrieve it with a simple API poll.",
-  },
-];
+import { useT } from "@/hooks/useT";
 
 export default function HowItWorksSection() {
+  const t = useT();
+  
+  const steps = [
+    {
+      number: "01",
+      title: t.howItWorks.step1Title,
+      description: t.howItWorks.step1Desc,
+    },
+    {
+      number: "02",
+      title: t.howItWorks.step2Title,
+      description: t.howItWorks.step2Desc,
+    },
+    {
+      number: "03",
+      title: t.howItWorks.step3Title,
+      description: t.howItWorks.step3Desc,
+    },
+  ];
+
   return (
     <section className="py-24 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -33,10 +33,10 @@ export default function HowItWorksSection() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-sm font-medium text-indigo-400 tracking-wide uppercase">
-            How It Works
+            {t.howItWorks.title}
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
-            Three steps to verify any number
+            {t.howItWorks.subtitle}
           </h2>
         </motion.div>
 

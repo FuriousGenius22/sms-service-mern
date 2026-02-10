@@ -2,8 +2,11 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { ROUTES } from "@/constants/routes";
+import { useT } from "@/hooks/useT";
 
 export default function HeroSection() {
+  const t = useT();
+  const hero = t.hero;
   return (
     <section className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
       {/* Ambient background gradients */}
@@ -25,7 +28,7 @@ export default function HeroSection() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              Trusted by 10,000+ developers worldwide
+              {hero.badge}
             </motion.div>
 
             <motion.h1
@@ -34,9 +37,9 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Phone Verification{" "}
+              {hero.title}{" "}
               <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-cyan-400 bg-clip-text text-transparent">
-                Made Simple
+                {hero.titleGradient}
               </span>
             </motion.h1>
 
@@ -46,9 +49,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Rent virtual phone numbers from 50+ countries. Send and receive
-              SMS for verification and testing — no hardware needed, just a
-              simple API call.
+              {hero.description}
             </motion.p>
 
             <motion.div
@@ -61,14 +62,14 @@ export default function HeroSection() {
                 to={ROUTES.REGISTER}
                 className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all duration-200"
               >
-                Get Started Free
+                {hero.getStartedFree}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <a
                 href="#features"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] text-gray-300 hover:text-white font-medium text-sm transition-all duration-200"
               >
-                View Documentation
+                {hero.viewDocs}
               </a>
             </motion.div>
 
@@ -81,17 +82,17 @@ export default function HeroSection() {
             >
               <div>
                 <p className="text-2xl font-bold text-white">50+</p>
-                <p className="text-xs text-gray-500 mt-0.5">Countries</p>
+                <p className="text-xs text-gray-500 mt-0.5">{hero.countries}</p>
               </div>
               <div className="w-px h-8 bg-white/[0.06]" />
               <div>
                 <p className="text-2xl font-bold text-white">99.9%</p>
-                <p className="text-xs text-gray-500 mt-0.5">Uptime</p>
+                <p className="text-xs text-gray-500 mt-0.5">{hero.uptime}</p>
               </div>
               <div className="w-px h-8 bg-white/[0.06]" />
               <div>
                 <p className="text-2xl font-bold text-white">&lt;5s</p>
-                <p className="text-xs text-gray-500 mt-0.5">Delivery</p>
+                <p className="text-xs text-gray-500 mt-0.5">{hero.delivery}</p>
               </div>
             </motion.div>
           </div>

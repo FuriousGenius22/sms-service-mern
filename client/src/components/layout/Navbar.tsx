@@ -4,13 +4,10 @@ import { Link } from "react-router-dom";
 import { MenuIcon, XIcon, ChevronDownIcon } from "lucide-react";
 import { ROUTES } from "@/constants/routes";
 import { blogPosts } from "@/data/blog";
+import { LanguageSelector } from "./LanguageSelector";
+import { useT } from "@/hooks/useT";
 
-const navItems = [
-  { label: "Features", href: "#features", isRoute: false, hasDropdown: false },
-  { label: "Pricing", href: "#pricing", isRoute: false, hasDropdown: false },
-  { label: "Testimonials", href: "#testimonials", isRoute: false, hasDropdown: false },
-  { label: "Blog", href: "/blog", isRoute: true, hasDropdown: true },
-];
+
 
 function NavLink({
   item,
@@ -19,7 +16,7 @@ function NavLink({
   onMouseEnter,
   onMouseLeave,
 }: {
-  item: (typeof navItems)[number];
+  item: { label: string; href: string; isRoute: boolean; hasDropdown: boolean };
   className: string;
   onClick?: () => void;
   onMouseEnter?: () => void;
@@ -31,7 +28,7 @@ function NavLink({
         {item.label}
         {item.hasDropdown && <ChevronDownIcon className="w-3 h-3" />}
       </span>
-      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 ease-out group-hover:w-full" />
+      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 ease-out group-hover:w-full origin-left" />
     </span>
   );
 
@@ -65,6 +62,14 @@ function NavLink({
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [blogDropdownOpen, setBlogDropdownOpen] = useState(false);
+  const t = useT();
+  
+  const navItems = [
+    { label: t.nav.features, href: "#features", isRoute: false, hasDropdown: false },
+    { label: t.nav.pricing, href: "#pricing", isRoute: false, hasDropdown: false },
+    { label: t.nav.testimonials, href: "#testimonials", isRoute: false, hasDropdown: false },
+    { label: t.nav.blog, href: "/blog", isRoute: true, hasDropdown: true },
+  ];
 
   return (
     <>
@@ -155,17 +160,18 @@ export function Navbar() {
             </div>
 
             <div className="flex items-center gap-3">
+              <LanguageSelector />
               <Link
                 to={ROUTES.LOGIN}
                 className="hidden sm:inline-flex text-sm text-gray-300 hover:text-white transition-colors px-3 py-1.5"
               >
-                Log in
+                {t.nav.login}
               </Link>
               <Link
                 to={ROUTES.REGISTER}
                 className="text-sm font-medium px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors duration-200"
               >
-                Get Started
+                {t.nav.getStarted}
               </Link>
               <button
                 onClick={() => setMobileOpen(true)}
@@ -201,14 +207,14 @@ export function Navbar() {
             onClick={() => setMobileOpen(false)}
             className="text-lg text-gray-300 hover:text-white"
           >
-            Log in
+            {t.nav.login}
           </Link>
           <Link
             to={ROUTES.REGISTER}
             onClick={() => setMobileOpen(false)}
             className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-medium"
           >
-            Get Started
+            {t.nav.getStarted}
           </Link>
         </div>
         <button

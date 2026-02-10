@@ -9,68 +9,37 @@
 *::before,
 *::after {
   scrollbar-width: thin;
-  scrollbar-color: #ef4444 #dc2626;
+  scrollbar-color: #a855f7 rgba(255, 255, 255, 0.05);
 }
 
-/* Custom scrollbar - Red sparkling ball on red line */
+/* Custom scrollbar - Perfect circle ball with purple gradient on thin line */
 *::-webkit-scrollbar {
   display: block;
-  width: 12px;
+  width: 10px;
 }
 
 *::-webkit-scrollbar-track {
-  background: linear-gradient(to bottom, #dc2626 0%, #dc2626 100%);
-  border-radius: 10px;
-  width: 3px;
-  margin: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  margin: 4px 0;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: radial-gradient(circle, #ff6b6b 0%, #ef4444 40%, #dc2626 100%);
+  background: linear-gradient(180deg, #a855f7 0%, #7c3aed 50%, #6366f1 100%);
   border-radius: 50%;
-  border: 2px solid rgba(239, 68, 68, 0.3);
-  box-shadow: 
-    0 0 10px rgba(239, 68, 68, 0.8),
-    0 0 20px rgba(239, 68, 68, 0.6),
-    0 0 30px rgba(239, 68, 68, 0.4),
-    inset 0 0 10px rgba(255, 255, 255, 0.3);
-  min-height: 40px;
-  animation: sparkle 2s ease-in-out infinite;
+  width: 10px;
+  height: 10px;
+  min-height: 10px;
+  max-height: 10px;
+  border: 0;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: radial-gradient(circle, #ff8787 0%, #ff6b6b 40%, #ef4444 100%);
-  box-shadow: 
-    0 0 15px rgba(239, 68, 68, 1),
-    0 0 25px rgba(239, 68, 68, 0.8),
-    0 0 35px rgba(239, 68, 68, 0.6),
-    inset 0 0 15px rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, #c084fc 0%, #a855f7 50%, #818cf8 100%);
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background: radial-gradient(circle, #ffa3a3 0%, #ff8787 40%, #ff6b6b 100%);
-  box-shadow: 
-    0 0 20px rgba(239, 68, 68, 1),
-    0 0 30px rgba(239, 68, 68, 0.9),
-    0 0 40px rgba(239, 68, 68, 0.7),
-    inset 0 0 20px rgba(255, 255, 255, 0.6);
-}
-
-@keyframes sparkle {
-  0%, 100% {
-    box-shadow: 
-      0 0 10px rgba(239, 68, 68, 0.8),
-      0 0 20px rgba(239, 68, 68, 0.6),
-      0 0 30px rgba(239, 68, 68, 0.4),
-      inset 0 0 10px rgba(255, 255, 255, 0.3);
-  }
-  50% {
-    box-shadow: 
-      0 0 15px rgba(239, 68, 68, 1),
-      0 0 30px rgba(239, 68, 68, 0.8),
-      0 0 45px rgba(239, 68, 68, 0.6),
-      inset 0 0 15px rgba(255, 255, 255, 0.5);
-  }
+  background: linear-gradient(180deg, #9333ea 0%, #6d28d9 50%, #4f46e5 100%);
 }
 
 /* Custom scrollbar for dropdown - keep the subtle style */
