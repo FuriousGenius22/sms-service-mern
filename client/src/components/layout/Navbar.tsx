@@ -69,6 +69,7 @@ export function Navbar() {
     { label: t.nav.pricing, href: "#pricing", isRoute: false, hasDropdown: false },
     { label: t.nav.testimonials, href: "#testimonials", isRoute: false, hasDropdown: false },
     { label: t.nav.blog, href: "/blog", isRoute: true, hasDropdown: true },
+    { label: "App", href: "/app/dashboard", isRoute: true, hasDropdown: false },
   ];
 
   return (
