@@ -3,8 +3,11 @@ import { MainLayout } from "@/layouts/MainLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { DashboardLayout } from "@/layouts/DashboardLayout";
 import HomePage from "@/pages/HomePage";
+import { BlogListPage } from "@/pages/blog/BlogListPage";
+import { BlogPostPage } from "@/pages/blog/BlogPostPage";
 import { LoginPage } from "@/pages/auth/LoginPage";
 import { RegisterPage } from "@/pages/auth/RegisterPage";
+import { ForgotPasswordPage } from "@/pages/auth/ForgotPasswordPage";
 import { DashboardPage } from "@/pages/dashboard/DashboardPage";
 import { ProfilePage } from "@/pages/dashboard/ProfilePage";
 import { SettingsPage } from "@/pages/dashboard/SettingsPage";
@@ -18,11 +21,14 @@ export function AppRoutes() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path={ROUTES.HOME} element={<HomePage />} />
+        <Route path={ROUTES.BLOG} element={<BlogListPage />} />
+        <Route path={ROUTES.BLOG_POST} element={<BlogPostPage />} />
       </Route>
 
       <Route element={<AuthLayout />}>
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+        <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
       </Route>
 
       <Route element={<DashboardLayout />}>

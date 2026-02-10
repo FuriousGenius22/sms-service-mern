@@ -1,68 +1,102 @@
-import SectionTitle from "../components/SectionTitle";
-import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
-import { featuresData } from "../data/features";
-import type { IFeature } from "../types";
+import {
+  Globe,
+  Zap,
+  Code2,
+  Shield,
+  CreditCard,
+  Clock,
+} from "lucide-react";
+
+const features = [
+  {
+    icon: Globe,
+    title: "Global Coverage",
+    description:
+      "Access virtual phone numbers from 50+ countries. Expand your verification reach worldwide with local numbers.",
+  },
+  {
+    icon: Zap,
+    title: "Instant Activation",
+    description:
+      "Numbers provisioned in seconds. Start sending and receiving SMS verification codes immediately after setup.",
+  },
+  {
+    icon: Code2,
+    title: "Developer-First API",
+    description:
+      "Clean REST API with comprehensive documentation, SDKs for popular languages, and webhook support.",
+  },
+  {
+    icon: Shield,
+    title: "Enterprise Security",
+    description:
+      "SOC 2 compliant infrastructure with end-to-end encryption. Your verification data stays secure.",
+  },
+  {
+    icon: CreditCard,
+    title: "Pay As You Go",
+    description:
+      "No long-term commitments. Only pay for the verifications you use, with volume discounts available.",
+  },
+  {
+    icon: Clock,
+    title: "Real-Time Delivery",
+    description:
+      "SMS codes delivered in under 5 seconds. Get real-time status updates via webhooks or polling.",
+  },
+];
 
 export default function FeaturesSection() {
-    return (
-        <div id="features" className="px-4 md:px-16 lg:px-24 xl:px-32">
-            <SectionTitle text1="Features" text2="What you get" text3="Components, patterns and pages — everything you need to ship." />
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-4 mt-16 px-6">
-                {featuresData.map((feature: IFeature, index: number) => (
-                    <motion.div key={index} className={`${index === 1 ? 'p-px rounded-[13px] bg-linear-to-br from-pink-600 to-slate-800' : ''}`}
-                        initial={{ y: 150, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.15, type: "spring", stiffness: 320, damping: 70, mass: 1 }}
-                    >
-                        <div className="p-6 rounded-xl space-y-4 border border-slate-800 bg-slate-950 max-w-80 w-full">
-                            {feature.icon}
-                            <h3 className="text-base font-medium text-white">
-                                {feature.title}
-                            </h3>
-                            <p className="text-slate-400 line-clamp-2 pb-4">
-                                {feature.description}
-                            </p>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-            <div className="mt-40 relative mx-auto max-w-5xl">
-                <div className="absolute -z-50 size-100 -top-10 -left-20 aspect-square rounded-full bg-pink-500/40 blur-3xl"></div>
-                <motion.p className="text-slate-300 text-lg text-left max-w-3xl"
-                    initial={{ y: 150, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 320, damping: 70, mass: 1 }}
-                >
-                    PrebuiltUI helps you build faster by transforming your design vision into fully functional, production-ready UI components.
-                </motion.p>
-                <div className="grid grid-cols-1 md:grid-cols-3 mt-8 gap-10">
-                    <motion.div className="md:col-span-2"
-                        initial={{ y: 150, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ type: "spring", stiffness: 240, damping: 70, mass: 1 }}
-                    >
-                        <img className="h-full w-auto" src="/assets/features-showcase-1.png" alt="features showcase" width={1000} height={500} />
-                    </motion.div>
-                    <motion.div className="md:col-span-1"
-                        initial={{ y: 150, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.15, type: "spring", stiffness: 320, damping: 70, mass: 1 }}
-                    >
-                        <img src="/assets/features-showcase-2.png" alt="features showcase" width={1000} height={500} className="hover:-translate-y-0.5 transition duration-300" />
-                        <h3 className="text-[24px]/7.5 text-slate-300 font-medium mt-6">Better design with highest revenue and profits </h3>
-                        <p className="text-slate-300 mt-2">PrebuiltUI empowers you to build beautifully and scale effortlessly.</p>
-                        <a href="#!" className="group flex items-center gap-2 mt-4 text-pink-600 hover:text-pink-700 transition">
-                            Learn more about the product
-                            <ArrowUpRight className="size-5 group-hover:translate-x-0.5 transition duration-300" />
-                        </a>
-                    </motion.div>
+  return (
+    <section id="features" className="py-24 relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-sm font-medium text-indigo-400 tracking-wide uppercase">
+            Features
+          </p>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+            Everything you need for SMS verification
+          </h2>
+          <p className="mt-4 text-gray-400 text-lg leading-relaxed">
+            A complete platform for phone number verification — simple
+            integration, reliable delivery, and global reach.
+          </p>
+        </motion.div>
+
+        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <motion.div
+                key={feature.title}
+                className="group relative p-6 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.04] transition-colors duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+              >
+                <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-indigo-400" />
                 </div>
-            </div>
+                <h3 className="font-semibold text-white">{feature.title}</h3>
+                <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
-    );
+      </div>
+
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+    </section>
+  );
 }

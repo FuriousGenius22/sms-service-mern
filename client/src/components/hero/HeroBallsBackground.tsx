@@ -110,8 +110,8 @@ function CubesGroup() {
   useFrame((state) => {
     const t = state.clock.elapsedTime;
 
-    // Fixed position - moved a little down and more right
-    const triangleCenter = new THREE.Vector3(3.5, -1.0, -3);
+    // Fixed position - shifted right-bottom
+    const triangleCenter = new THREE.Vector3(4.0, -1.4, -3);
 
     // Slowly rotate the triangle formation
     triangleRotation.current = t * 0.15;

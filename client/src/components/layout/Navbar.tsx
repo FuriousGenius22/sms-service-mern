@@ -1,56 +1,135 @@
-import { MenuIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import { MenuIcon, XIcon } from "lucide-react";
 import { ROUTES } from "@/constants/routes";
 
+const navItems = [
+  { label: "Features", href: "#features", isRoute: false },
+  { label: "Pricing", href: "#pricing", isRoute: false },
+  { label: "Testimonials", href: "#testimonials", isRoute: false },
+  { label: "Blog", href: "/blog", isRoute: true },
+];
+
+function NavLink({
+  item,
+  className,
+  onClick,
+}: {
+  item: (typeof navItems)[number];
+  className: string;
+  onClick?: () => void;
+}) {
+  if (item.isRoute) {
+    return (
+      <Link to={item.href} className={className} onClick={onClick}>
+        {item.label}
+      </Link>
+    );
+  }
+  return (
+    <a href={item.href} className={className} onClick={onClick}>
+      {item.label}
+    </a>
+  );
+}
+
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <>
-      <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 w-full pointer-events-auto"
-        initial={{ y: -100, opacity: 0 }}
+      <motion.header
+        className="fixed top-0 left-0 right-0 z-50"
+        initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="flex w-full items-center justify-between rounded-b-2xl bg-linear-to-b from-pink-900 to-pink-950 px-4 py-3 text-white shadow-lg md:px-8">
-          <Link to={ROUTES.HOME} className="flex items-center">
-            <img className="h-8 w-auto" src="/assets/logo.svg" alt="logo" width={130} height={34} />
-          </Link>
-
-          <div className="flex items-center gap-3">
-            <Link
-              to={ROUTES.LOGIN}
-              className="bg-linear-to-r from-white to-pink-400 bg-clip-text font-medium text-transparent hover:opacity-90 px-4 py-2 rounded-full border border-pink-400/50 text-sm md:text-base"
-            >
-              Log in
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center justify-between h-14 mt-4 px-5 rounded-2xl border border-white/[0.06] bg-[#06080f]/70 backdrop-blur-xl">
+            <Link to={ROUTES.HOME} className="flex-shrink-0">
+              <img
+                src="/assets/logo.svg"
+                alt="Logo"
+                className="h-7 w-auto"
+                width={120}
+                height={28}
+              />
             </Link>
-            <button onClick={() => setIsOpen(true)} className="md:hidden p-2 text-white" aria-label="Open menu">
-              <MenuIcon size={26} className="active:scale-90 transition" />
-            </button>
-          </div>
-        </div>
-      </motion.nav>
 
-      {/* Mobile menu: only Login */}
+            <div className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.label}
+                  item={item}
+                  className="text-sm text-gray-400 hover:text-white transition-colors duration-200"
+                />
+              ))}
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Link
+                to={ROUTES.LOGIN}
+                className="hidden sm:inline-flex text-sm text-gray-300 hover:text-white transition-colors px-3 py-1.5"
+              >
+                Log in
+              </Link>
+              <Link
+                to={ROUTES.REGISTER}
+                className="text-sm font-medium px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors duration-200"
+              >
+                Get Started
+              </Link>
+              <button
+                onClick={() => setMobileOpen(true)}
+                className="md:hidden p-1.5 text-gray-400 hover:text-white transition-colors"
+                aria-label="Open menu"
+              >
+                <MenuIcon size={22} />
+              </button>
+            </div>
+          </nav>
+        </div>
+      </motion.header>
+
+      {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 z-[100] bg-black/40 backdrop-blur flex flex-col items-center justify-center gap-8 md:hidden transition-transform duration-400 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed inset-0 z-[100] bg-[#06080f]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-6 md:hidden transition-all duration-300 ${
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
       >
-        <Link
-          to={ROUTES.LOGIN}
-          onClick={() => setIsOpen(false)}
-          className="px-6 py-2.5 border border-pink-600 hover:bg-pink-600/20 rounded-full text-lg"
-        >
-          Log in
-        </Link>
+        {navItems.map((item) => (
+          <NavLink
+            key={item.label}
+            item={item}
+            onClick={() => setMobileOpen(false)}
+            className="text-lg text-gray-300 hover:text-white transition-colors"
+          />
+        ))}
+        <div className="flex flex-col items-center gap-3 mt-4">
+          <Link
+            to={ROUTES.LOGIN}
+            onClick={() => setMobileOpen(false)}
+            className="text-lg text-gray-300 hover:text-white"
+          >
+            Log in
+          </Link>
+          <Link
+            to={ROUTES.REGISTER}
+            onClick={() => setMobileOpen(false)}
+            className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-medium"
+          >
+            Get Started
+          </Link>
+        </div>
         <button
-          onClick={() => setIsOpen(false)}
-          className="aspect-square size-10 p-1 items-center justify-center bg-pink-600 hover:bg-pink-700 transition text-white rounded-md flex"
+          onClick={() => setMobileOpen(false)}
+          className="absolute top-6 right-6 p-2 text-gray-400 hover:text-white transition-colors"
           aria-label="Close menu"
         >
-          <XIcon />
+          <XIcon size={22} />
         </button>
       </div>
     </>

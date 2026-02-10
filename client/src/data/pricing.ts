@@ -2,44 +2,49 @@ import type { IPricing } from "../types";
 
 export const pricingData: IPricing[] = [
     {
-        name: "Basic",
-        price: 29,
+        name: "Starter",
+        price: 19,
         period: "month",
+        description: "For individuals and small projects getting started.",
         features: [
-            "Access to all basic courses",
-            "Community support",
-            "10 practice projects",
-            "Course completion certificate",
-            "Basic code review"
+            "100 verifications / month",
+            "10 virtual phone numbers",
+            "REST API access",
+            "Email support",
+            "Basic analytics dashboard",
         ],
-        mostPopular: false
+        mostPopular: false,
     },
     {
         name: "Pro",
-        price: 79,
+        price: 49,
         period: "month",
+        description: "For growing teams that need more volume and features.",
         features: [
-            "Access to all Pro courses",
-            "Priority community support",
-            "30 practice projects",
-            "Course completion certificate",
-            "Advance code review",
-            "1-on-1 mentoring sessions",
-            "Job assistance"
+            "1,000 verifications / month",
+            "50 virtual phone numbers",
+            "Priority API access",
+            "Webhooks & real-time callbacks",
+            "Advanced analytics",
+            "Priority email & chat support",
+            "Custom sender IDs",
         ],
-        mostPopular: true
+        mostPopular: true,
     },
     {
         name: "Enterprise",
-        price: 199,
-        period: "month",
+        price: 0,
+        period: "",
+        description: "For organizations with high volume and custom needs.",
         features: [
-            "Access to all courses",
-            "Dedicated support",
-            "Unlimited projects",
-            "Course completion certificate",
-            "Premium code review"
+            "Unlimited verifications",
+            "Unlimited phone numbers",
+            "Dedicated infrastructure",
+            "99.99% uptime SLA",
+            "24/7 phone & Slack support",
+            "Dedicated account manager",
+            "Custom integration support",
         ],
-        mostPopular: false
-    }
+        mostPopular: false,
+    },
 ];

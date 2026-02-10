@@ -1,41 +1,105 @@
-import SectionTitle from "../components/SectionTitle"
-import { pricingData } from "../data/pricing";
-import type { IPricing } from "../types";
-import { CheckIcon } from "lucide-react";
 import { motion } from "motion/react";
+import { CheckIcon } from "lucide-react";
+import { pricingData } from "../data/pricing";
+import { Link } from "react-router-dom";
+import { ROUTES } from "@/constants/routes";
+import type { IPricing } from "../types";
 
 export default function PricingSection() {
-    return (
-        <div id="pricing" className="px-4 md:px-16 lg:px-24 xl:px-32">
-            <SectionTitle text1="Pricing" text2="Our Pricing Plans" text3="Flexible pricing options designed to meet your needs — whether you're just getting started or scaling up." />
+  return (
+    <section id="pricing" className="py-24 relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-sm font-medium text-indigo-400 tracking-wide uppercase">
+            Pricing
+          </p>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
+            Simple, transparent pricing
+          </h2>
+          <p className="mt-4 text-gray-400 text-lg">
+            Start free, scale as you grow. No hidden fees.
+          </p>
+        </motion.div>
 
-            <div className="flex flex-wrap items-center justify-center gap-8 mt-20">
-                {pricingData.map((plan: IPricing, index: number) => (
-                    <motion.div key={index} className={`w-72 text-center border border-pink-950 p-6 pb-16 rounded-xl ${plan.mostPopular ? 'bg-pink-950 relative' : 'bg-pink-950/30'}`}
-                        initial={{ y: 150, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.15, type: "spring", stiffness: 320, damping: 70, mass: 1 }}
-                    >
-                        {plan.mostPopular && (
-                            <p className="absolute px-3 text-sm -top-3.5 left-3.5 py-1 bg-pink-400 rounded-full">Most Popular</p>
-                        )}
-                        <p className="font-semibold">{plan.name}</p>
-                        <h1 className="text-3xl font-semibold">${plan.price}<span className="text-gray-500 font-normal text-sm">/{plan.period}</span></h1>
-                        <ul className="list-none text-slate-300 mt-6 space-y-2">
-                            {plan.features.map((feature, index) => (
-                                <li key={index} className="flex items-center gap-2">
-                                    <CheckIcon className="size-4.5 text-pink-600" />
-                                    <p>{feature}</p>
-                                </li>
-                            ))}
-                        </ul>
-                        <button type="button" className={`w-full py-2.5 rounded-md font-medium mt-7 transition-all ${plan.mostPopular ? 'bg-white text-pink-600 hover:bg-slate-200' : 'bg-pink-500 hover:bg-pink-600'}`}>
-                            Get Started
-                        </button>
-                    </motion.div>
+        <div className="mt-16 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {pricingData.map((plan: IPricing, index: number) => (
+            <motion.div
+              key={plan.name}
+              className={`relative rounded-xl p-6 flex flex-col ${
+                plan.mostPopular
+                  ? "border-2 border-indigo-500/50 bg-indigo-500/[0.05]"
+                  : "border border-white/[0.06] bg-white/[0.02]"
+              }`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              {plan.mostPopular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-indigo-500 text-white text-xs font-medium">
+                  Most Popular
+                </div>
+              )}
+
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-white">
+                  {plan.name}
+                </h3>
+                {plan.description && (
+                  <p className="mt-1 text-sm text-gray-500">
+                    {plan.description}
+                  </p>
+                )}
+              </div>
+
+              <div className="mb-6">
+                {plan.price === 0 ? (
+                  <p className="text-4xl font-bold text-white">Custom</p>
+                ) : (
+                  <p className="text-4xl font-bold text-white">
+                    ${plan.price}
+                    <span className="text-base font-normal text-gray-500">
+                      /{plan.period}
+                    </span>
+                  </p>
+                )}
+              </div>
+
+              <ul className="space-y-3 mb-8 flex-1">
+                {plan.features.map((feature, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-sm text-gray-300"
+                  >
+                    <CheckIcon className="w-4 h-4 text-indigo-400 mt-0.5 flex-shrink-0" />
+                    {feature}
+                  </li>
                 ))}
-            </div>
+              </ul>
+
+              <Link
+                to={plan.price === 0 ? "#" : ROUTES.REGISTER}
+                className={`block text-center py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
+                  plan.mostPopular
+                    ? "bg-indigo-600 hover:bg-indigo-500 text-white"
+                    : "border border-white/[0.1] hover:border-white/[0.2] text-gray-300 hover:text-white"
+                }`}
+              >
+                {plan.price === 0 ? "Contact Sales" : "Get Started"}
+              </Link>
+            </motion.div>
+          ))}
         </div>
-    );
+      </div>
+
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+    </section>
+  );
 }

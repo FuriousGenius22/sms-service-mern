@@ -53,6 +53,7 @@ export interface IPricing {
     name: string;
     price: number;
     period: string;
+    description?: string;
     features: string[];
     mostPopular: boolean;
 }
