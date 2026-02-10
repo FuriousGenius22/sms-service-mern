@@ -4,11 +4,31 @@ import { ChevronDownIcon } from "lucide-react";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 
 const languages = [
-  { code: "en" as Language, name: "English", flag: "🇺🇸" },
-  { code: "es" as Language, name: "Español", flag: "🇪🇸" },
-  { code: "de" as Language, name: "Deutsch", flag: "🇩🇪" },
-  { code: "zh" as Language, name: "中文", flag: "🇨🇳" },
-  { code: "vi" as Language, name: "Tiếng Việt", flag: "🇻🇳" },
+  { 
+    code: "en" as Language, 
+    name: "English", 
+    flag: "https://flagcdn.com/w40/us.png"
+  },
+  { 
+    code: "es" as Language, 
+    name: "Español", 
+    flag: "https://flagcdn.com/w40/es.png"
+  },
+  { 
+    code: "de" as Language, 
+    name: "Deutsch", 
+    flag: "https://flagcdn.com/w40/de.png"
+  },
+  { 
+    code: "zh" as Language, 
+    name: "中文", 
+    flag: "https://flagcdn.com/w40/cn.png"
+  },
+  { 
+    code: "vi" as Language, 
+    name: "Tiếng Việt", 
+    flag: "https://flagcdn.com/w40/vn.png"
+  },
 ];
 
 export function LanguageSelector() {
@@ -24,7 +44,11 @@ export function LanguageSelector() {
         className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/[0.05] transition-colors text-sm"
         aria-label="Select language"
       >
-        <span className="text-lg">{currentLang?.flag}</span>
+        <img 
+          src={currentLang?.flag} 
+          alt={currentLang?.name}
+          className="w-5 h-auto rounded-sm"
+        />
         <ChevronDownIcon className="w-3.5 h-3.5 text-gray-400" />
       </button>
 
@@ -56,7 +80,11 @@ export function LanguageSelector() {
                         : "text-gray-300 hover:bg-white/[0.05] hover:text-white"
                     }`}
                   >
-                    <span className="text-lg">{lang.flag}</span>
+                    <img 
+                      src={lang.flag} 
+                      alt={lang.name}
+                      className="w-6 h-auto rounded-sm"
+                    />
                     <span>{lang.name}</span>
                   </button>
                 ))}
