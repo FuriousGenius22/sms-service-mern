@@ -18,11 +18,11 @@ export function AuthLayout() {
         >
           <Link to="/" className="inline-block">
             <img
-              src="/assets/logo.svg"
+              src="/logo/logo_bright.png"
               alt="Logo"
-              className="h-8 w-auto mx-auto"
-              width={130}
-              height={32}
+              className="h-10 w-auto mx-auto"
+              width={160}
+              height={40}
             />
           </Link>
         </motion.div>

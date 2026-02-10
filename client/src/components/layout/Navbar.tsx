@@ -45,15 +45,15 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-between h-14 mt-4 px-5 rounded-2xl border border-white/[0.06] bg-[#06080f]/70 backdrop-blur-xl">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center justify-between h-[88px] px-8 border-b border-white/[0.06] bg-[#06080f]/70 backdrop-blur-xl">
             <Link to={ROUTES.HOME} className="flex-shrink-0">
               <img
-                src="/assets/logo.svg"
+                src="/logo/logo_bright.png"
                 alt="Logo"
-                className="h-7 w-auto"
-                width={120}
-                height={28}
+                className="h-12 w-auto"
+                width={180}
+                height={48}
               />
             </Link>
 

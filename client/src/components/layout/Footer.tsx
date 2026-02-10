@@ -1,5 +1,4 @@
 import { footerData } from "@/constants/footer";
-import { GithubIcon, LinkedinIcon, TwitterIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { IFooterLink } from "@/types";
 
@@ -12,11 +11,11 @@ export function Footer() {
           <div className="col-span-2">
             <Link to="/">
               <img
-                src="/assets/logo.svg"
+                src="/logo/logo_bright.png"
                 alt="Logo"
-                className="h-7 w-auto"
-                width={120}
-                height={28}
+                className="h-10 w-auto"
+                width={160}
+                height={40}
               />
             </Link>
             <p className="mt-4 text-sm text-gray-500 max-w-xs leading-relaxed">
@@ -27,23 +26,46 @@ export function Footer() {
               <a
                 href="#!"
                 className="text-gray-500 hover:text-gray-300 transition-colors"
-                aria-label="Twitter"
-              >
-                <TwitterIcon className="w-4 h-4" />
-              </a>
-              <a
-                href="#!"
-                className="text-gray-500 hover:text-gray-300 transition-colors"
                 aria-label="GitHub"
               >
-                <GithubIcon className="w-4 h-4" />
+                <img 
+                  src="https://cdn.simpleicons.org/github/gray" 
+                  alt="GitHub" 
+                  className="w-5 h-5 hover:opacity-80 transition-opacity"
+                />
               </a>
               <a
                 href="#!"
                 className="text-gray-500 hover:text-gray-300 transition-colors"
-                aria-label="LinkedIn"
+                aria-label="Telegram"
               >
-                <LinkedinIcon className="w-4 h-4" />
+                <img 
+                  src="https://cdn.simpleicons.org/telegram/gray" 
+                  alt="Telegram" 
+                  className="w-5 h-5 hover:opacity-80 transition-opacity"
+                />
+              </a>
+              <a
+                href="#!"
+                className="text-gray-500 hover:text-gray-300 transition-colors"
+                aria-label="Discord"
+              >
+                <img 
+                  src="https://cdn.simpleicons.org/discord/gray" 
+                  alt="Discord" 
+                  className="w-5 h-5 hover:opacity-80 transition-opacity"
+                />
+              </a>
+              <a
+                href="#!"
+                className="text-gray-500 hover:text-gray-300 transition-colors"
+                aria-label="WhatsApp"
+              >
+                <img 
+                  src="https://cdn.simpleicons.org/whatsapp/gray" 
+                  alt="WhatsApp" 
+                  className="w-5 h-5 hover:opacity-80 transition-opacity"
+                />
               </a>
             </div>
           </div>
