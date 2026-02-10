@@ -1,8 +1,11 @@
 import { motion } from "motion/react";
 import { testimonialsData } from "../data/testimonial";
 import { Star } from "lucide-react";
+import { useT } from "@/hooks/useT";
 
 export default function TestimonialSection() {
+  const t = useT();
+  
   return (
     <section id="testimonials" className="py-24 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -14,13 +17,13 @@ export default function TestimonialSection() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-sm font-medium text-indigo-400 tracking-wide uppercase">
-            Testimonials
+            {t.testimonials.title}
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
-            Loved by developers
+            {t.testimonials.subtitle}
           </h2>
           <p className="mt-4 text-gray-400 text-lg">
-            See what our customers have to say about their experience.
+            {t.testimonials.description}
           </p>
         </motion.div>
 

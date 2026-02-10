@@ -4,8 +4,11 @@ import { pricingData } from "../data/pricing";
 import { Link } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
 import type { IPricing } from "../types";
+import { useT } from "@/hooks/useT";
 
 export default function PricingSection() {
+  const t = useT();
+  
   return (
     <section id="pricing" className="py-24 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -17,13 +20,13 @@ export default function PricingSection() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-sm font-medium text-indigo-400 tracking-wide uppercase">
-            Pricing
+            {t.pricing.title}
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
-            Simple, transparent pricing
+            {t.pricing.subtitle}
           </h2>
           <p className="mt-4 text-gray-400 text-lg">
-            Start free, scale as you grow. No hidden fees.
+            {t.pricing.description}
           </p>
         </motion.div>
 
@@ -43,7 +46,7 @@ export default function PricingSection() {
             >
               {plan.mostPopular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-indigo-500 text-white text-xs font-medium">
-                  Most Popular
+                  {t.pricing.mostPopular}
                 </div>
               )}
 
@@ -60,12 +63,12 @@ export default function PricingSection() {
 
               <div className="mb-6">
                 {plan.price === 0 ? (
-                  <p className="text-4xl font-bold text-white">Custom</p>
+                  <p className="text-4xl font-bold text-white">{t.pricing.custom}</p>
                 ) : (
                   <p className="text-4xl font-bold text-white">
                     ${plan.price}
                     <span className="text-base font-normal text-gray-500">
-                      /{plan.period}
+                      /{t.pricing.month}
                     </span>
                   </p>
                 )}
@@ -91,7 +94,7 @@ export default function PricingSection() {
                     : "border border-white/[0.1] hover:border-white/[0.2] text-gray-300 hover:text-white"
                 }`}
               >
-                {plan.price === 0 ? "Contact Sales" : "Get Started"}
+                {plan.price === 0 ? t.pricing.contactSales : t.pricing.getStarted}
               </Link>
             </motion.div>
           ))}

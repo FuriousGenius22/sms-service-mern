@@ -7,47 +7,44 @@ import {
   CreditCard,
   Clock,
 } from "lucide-react";
-
-const features = [
-  {
-    icon: Globe,
-    title: "Global Coverage",
-    description:
-      "Access virtual phone numbers from 50+ countries. Expand your verification reach worldwide with local numbers.",
-  },
-  {
-    icon: Zap,
-    title: "Instant Activation",
-    description:
-      "Numbers provisioned in seconds. Start sending and receiving SMS verification codes immediately after setup.",
-  },
-  {
-    icon: Code2,
-    title: "Developer-First API",
-    description:
-      "Clean REST API with comprehensive documentation, SDKs for popular languages, and webhook support.",
-  },
-  {
-    icon: Shield,
-    title: "Enterprise Security",
-    description:
-      "SOC 2 compliant infrastructure with end-to-end encryption. Your verification data stays secure.",
-  },
-  {
-    icon: CreditCard,
-    title: "Pay As You Go",
-    description:
-      "No long-term commitments. Only pay for the verifications you use, with volume discounts available.",
-  },
-  {
-    icon: Clock,
-    title: "Real-Time Delivery",
-    description:
-      "SMS codes delivered in under 5 seconds. Get real-time status updates via webhooks or polling.",
-  },
-];
+import { useT } from "@/hooks/useT";
 
 export default function FeaturesSection() {
+  const t = useT();
+  
+  const features = [
+    {
+      icon: Globe,
+      title: t.features.globalCoverage,
+      description: t.features.globalCoverageDesc,
+    },
+    {
+      icon: Zap,
+      title: t.features.instantActivation,
+      description: t.features.instantActivationDesc,
+    },
+    {
+      icon: Code2,
+      title: t.features.developerApi,
+      description: t.features.developerApiDesc,
+    },
+    {
+      icon: Shield,
+      title: t.features.enterpriseSecurity,
+      description: t.features.enterpriseSecurityDesc,
+    },
+    {
+      icon: CreditCard,
+      title: t.features.payAsYouGo,
+      description: t.features.payAsYouGoDesc,
+    },
+    {
+      icon: Clock,
+      title: t.features.realTimeDelivery,
+      description: t.features.realTimeDeliveryDesc,
+    },
+  ];
+
   return (
     <section id="features" className="py-24 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -59,14 +56,13 @@ export default function FeaturesSection() {
           transition={{ duration: 0.5 }}
         >
           <p className="text-sm font-medium text-indigo-400 tracking-wide uppercase">
-            Features
+            {t.features.title}
           </p>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight">
-            Everything you need for SMS verification
+            {t.features.subtitle}
           </h2>
           <p className="mt-4 text-gray-400 text-lg leading-relaxed">
-            A complete platform for phone number verification — simple
-            integration, reliable delivery, and global reach.
+            {t.features.description}
           </p>
         </motion.div>
 

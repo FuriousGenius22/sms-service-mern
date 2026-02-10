@@ -2,8 +2,11 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { ROUTES } from "@/constants/routes";
+import { useT } from "@/hooks/useT";
 
 export default function CTASection() {
+  const t = useT();
+  
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -19,25 +22,24 @@ export default function CTASection() {
 
           <div className="relative z-10">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-              Ready to get started?
+              {t.cta.title}
             </h2>
             <p className="mt-4 text-gray-400 text-lg max-w-lg mx-auto">
-              Join thousands of developers using our platform for phone
-              verification. Start free — no credit card required.
+              {t.cta.description}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
               <Link
                 to={ROUTES.REGISTER}
                 className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-colors duration-200"
               >
-                Create Free Account
+                {t.cta.createAccount}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <a
                 href="#pricing"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-white/[0.1] hover:border-white/[0.2] text-gray-300 hover:text-white font-medium transition-all duration-200"
               >
-                View Pricing
+                {t.cta.viewPricing}
               </a>
             </div>
           </div>
