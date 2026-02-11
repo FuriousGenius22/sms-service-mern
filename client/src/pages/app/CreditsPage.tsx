@@ -37,16 +37,11 @@ export function CreditsPage() {
         <div className="relative p-8 border border-white/[0.08] rounded-2xl backdrop-blur-xl bg-gradient-to-br from-indigo-600/[0.08] to-pink-600/[0.05]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-pink-500 rounded-2xl blur-lg opacity-50" />
-                <div className="relative p-4 rounded-2xl bg-gradient-to-br from-indigo-500 to-pink-500 shadow-2xl">
-                  <img 
-                    src="https://cdn-icons-png.flaticon.com/128/3135/3135706.png" 
-                    alt="Credits"
-                    className="w-12 h-12"
-                  />
-                </div>
-              </div>
+              <img 
+                src="/credit-icon.gif" 
+                alt="Credits"
+                className="w-auto h-16"
+              />
               <div>
                 <p className="text-sm text-gray-400 mb-1">Current Balance</p>
                 <div className="flex items-baseline gap-2">
@@ -60,12 +55,13 @@ export function CreditsPage() {
                   </motion.h2>
                   <span className="text-xl text-gray-400">credits</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">≈ ${(currentCredits * 0.01).toFixed(2)} USD</p>
+                <p className="text-xs text-gray-500 mt-1">≈ ${(currentCredits * 1.00).toFixed(2)} USD</p>
               </div>
             </div>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = '/app/buy-credit'}
               className="relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-pink-600 rounded-xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
