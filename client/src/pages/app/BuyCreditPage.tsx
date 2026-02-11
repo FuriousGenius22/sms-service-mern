@@ -263,7 +263,6 @@ export function BuyCreditPage() {
                     <p className="text-xs text-gray-400 mb-3">Complete payment in your wallet. Credits added after confirmation.</p>
                     <div className="flex items-center gap-2 text-xs text-gray-500">
                       <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
-                      <span>Processing... 1-5 minutes</span>
                     </div>
                   </div>
                 </div>
