@@ -13,6 +13,7 @@ import { VerificationPage } from "@/pages/app/VerificationPage";
 import { CreditsPage } from "@/pages/app/CreditsPage";
 import { SupportPage } from "@/pages/app/SupportPage";
 import { BlogPage } from "@/pages/app/BlogPage";
+import { BuyCreditPage } from "@/pages/app/BuyCreditPage";
 import { ROUTES } from "@/constants/routes";
 
 /**
@@ -37,6 +38,7 @@ export function AppRoutes() {
         <Route path="overview" element={<OverviewPage />} />
         <Route path="verification" element={<VerificationPage />} />
         <Route path="credits" element={<CreditsPage />} />
+        <Route path="buy-credit" element={<BuyCreditPage />} />
         <Route path="support" element={<SupportPage />} />
         <Route path="blog" element={<BlogPage />} />
       </Route>
