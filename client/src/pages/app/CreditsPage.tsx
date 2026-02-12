@@ -1,8 +1,32 @@
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { CoinsIcon, PlusIcon, TrendingUpIcon, TrendingDownIcon, CalendarIcon } from "lucide-react";
+import { PlusIcon, TrendingUpIcon, TrendingDownIcon, CalendarIcon, LoaderIcon } from "lucide-react";
+import { authService } from "@/services/auth";
 
 export function CreditsPage() {
-  const currentCredits = 2450;
+  const [currentCredits, setCurrentCredits] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    authService
+      .getProfile()
+      .then((profile) => {
+        if (!cancelled && typeof profile.credits === "number") {
+          setCurrentCredits(profile.credits);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setError("Failed to load credits");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   
   const creditHistory = [
     { id: 1, type: "purchase", amount: 1000, balance: 2450, date: "2024-02-10", time: "14:30", description: "Credit purchase via Stripe" },
@@ -44,18 +68,29 @@ export function CreditsPage() {
               />
               <div>
                 <p className="text-sm text-gray-400 mb-1">Current Balance</p>
-                <div className="flex items-baseline gap-2">
-                  <motion.h2 
-                    className="text-5xl font-bold bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                  >
-                    {currentCredits.toLocaleString()}
-                  </motion.h2>
-                  <span className="text-xl text-gray-400">credits</span>
-                </div>
-                <p className="text-xs text-gray-500 mt-1">≈ ${(currentCredits * 1.00).toFixed(2)} USD</p>
+                {loading ? (
+                  <div className="flex items-center gap-2 text-gray-400">
+                    <LoaderIcon className="w-8 h-8 animate-spin" />
+                    <span className="text-lg">Loading...</span>
+                  </div>
+                ) : error ? (
+                  <p className="text-red-400 text-sm">{error}</p>
+                ) : (
+                  <>
+                    <div className="flex items-baseline gap-2">
+                      <motion.h2 
+                        className="text-5xl font-bold bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                      >
+                        {(currentCredits ?? 0).toLocaleString()}
+                      </motion.h2>
+                      <span className="text-xl text-gray-400">credits</span>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">≈ ${((currentCredits ?? 0) * 1.00).toFixed(2)} USD</p>
+                  </>
+                )}
               </div>
             </div>
             <motion.button

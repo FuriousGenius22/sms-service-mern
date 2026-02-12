@@ -8,6 +8,7 @@ import { BlogPostPage } from "@/pages/blog/BlogPostPage";
 import { LoginPage } from "@/pages/auth/LoginPage";
 import { RegisterPage } from "@/pages/auth/RegisterPage";
 import { ForgotPasswordPage } from "@/pages/auth/ForgotPasswordPage";
+import { HumanVerificationPage } from "@/pages/auth/HumanVerificationPage";
 import { OverviewPage } from "@/pages/app/OverviewPage";
 import { VerificationPage } from "@/pages/app/VerificationPage";
 import { CreditsPage } from "@/pages/app/CreditsPage";
@@ -15,6 +16,7 @@ import { SupportPage } from "@/pages/app/SupportPage";
 import { BlogPage } from "@/pages/app/BlogPage";
 import { BuyCreditPage } from "@/pages/app/BuyCreditPage";
 import { ROUTES } from "@/constants/routes";
+import { RequireHumanVerification } from "@/components/app/RequireHumanVerification";
 
 /**
  * Central route configuration. Add new routes here and create the corresponding page in pages/.
@@ -34,13 +36,20 @@ export function AppRoutes() {
         <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
       </Route>
 
-      <Route path="/app" element={<AppLayout />}>
-        <Route path="overview" element={<OverviewPage />} />
-        <Route path="verification" element={<VerificationPage />} />
-        <Route path="credits" element={<CreditsPage />} />
-        <Route path="buy-credit" element={<BuyCreditPage />} />
-        <Route path="support" element={<SupportPage />} />
-        <Route path="blog" element={<BlogPage />} />
+      {/* Human verification gate */}
+      <Route path="/verify-human" element={<HumanVerificationPage />} />
+
+      {/* Protected app routes — only logged-in users; human verification required */}
+      <Route element={<RequireHumanVerification />}>
+        <Route path="/app" element={<AppLayout />}>
+          <Route index element={<Navigate to="overview" replace />} />
+          <Route path="overview" element={<OverviewPage />} />
+          <Route path="verification" element={<VerificationPage />} />
+          <Route path="credits" element={<CreditsPage />} />
+          <Route path="buy-credit" element={<BuyCreditPage />} />
+          <Route path="support" element={<SupportPage />} />
+          <Route path="blog" element={<BlogPage />} />
+        </Route>
       </Route>
 
       <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />

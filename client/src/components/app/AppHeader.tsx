@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { 
   MenuIcon, 
   BellIcon, 
@@ -10,20 +10,42 @@ import {
 } from "lucide-react";
 import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import { motion, AnimatePresence } from "motion/react";
+import { authService } from "@/services/auth";
 
 interface AppHeaderProps {
   onMenuClick: () => void;
 }
 
 export function AppHeader({ onMenuClick }: AppHeaderProps) {
+  const navigate = useNavigate();
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+
+  const user = authService.getUser();
+
+  const handleSignOut = async () => {
+    setSigningOut(true);
+    try {
+      await authService.logout();
+      sessionStorage.removeItem("humanVerified");
+    } finally {
+      setSigningOut(false);
+      setUserMenuOpen(false);
+      navigate("/login");
+    }
+  };
 
   const notifications = [
     { id: 1, title: "New message from John", time: "2m ago", unread: true },
     { id: 2, title: "Order #1234 completed", time: "1h ago", unread: true },
     { id: 3, title: "System update available", time: "3h ago", unread: false },
   ];
+
+  // User initials for avatar
+  const initials = user?.name
+    ? user.name.split(" ").map((w: string) => w[0]).join("").toUpperCase().slice(0, 2)
+    : "U";
 
   return (
     <header className="fixed top-0 left-0 right-0 lg:left-64 h-20 z-50">
@@ -124,7 +146,7 @@ export function AppHeader({ onMenuClick }: AppHeaderProps) {
               aria-label="User menu"
             >
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center ring-2 ring-white/[0.1] group-hover:ring-white/[0.2] transition-all">
-                <UserIcon className="w-5 h-5 text-white" />
+                <span className="text-xs font-bold text-white">{initials}</span>
               </div>
               <ChevronDownIcon className="w-4 h-4 text-gray-400 hidden sm:block" />
             </button>
@@ -144,8 +166,8 @@ export function AppHeader({ onMenuClick }: AppHeaderProps) {
                     className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-white/[0.08] bg-[#06080f]/95 backdrop-blur-xl shadow-2xl z-50"
                   >
                     <div className="p-4 border-b border-white/[0.06]">
-                      <p className="font-medium text-white">John Doe</p>
-                      <p className="text-xs text-gray-500 mt-0.5">john@example.com</p>
+                      <p className="font-medium text-white truncate">{user?.name || "User"}</p>
+                      <p className="text-xs text-gray-500 mt-0.5 truncate">{user?.email || ""}</p>
                     </div>
                     <div className="p-2">
                       <Link
@@ -156,12 +178,15 @@ export function AppHeader({ onMenuClick }: AppHeaderProps) {
                         <SettingsIcon className="w-4 h-4" />
                         Settings
                       </Link>
+                    </div>
+                    <div className="p-2 pt-0 border-t border-white/[0.06]">
                       <button
-                        onClick={() => setUserMenuOpen(false)}
-                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-pink-400 hover:bg-white/[0.05] transition-colors"
+                        onClick={handleSignOut}
+                        disabled={signingOut}
+                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-red-400 hover:bg-red-500/[0.08] disabled:opacity-50 transition-colors mt-1"
                       >
                         <LogOutIcon className="w-4 h-4" />
-                        Sign out
+                        {signingOut ? "Signing out..." : "Sign out"}
                       </button>
                     </div>
                   </motion.div>
