@@ -9,12 +9,12 @@ export function ForgotPasswordPage() {
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
+        className="text-center mb-6 sm:mb-8"
       >
         <div className="mx-auto w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center mb-4">
           <MailIcon className="w-6 h-6 text-indigo-400" />
         </div>
-        <h1 className="text-2xl font-semibold text-white">Reset password</h1>
+        <h1 className="text-xl sm:text-2xl font-semibold text-white">Reset password</h1>
         <p className="text-gray-400 mt-1 text-sm max-w-xs mx-auto">
           Enter your email address and we&apos;ll send you a link to reset your
           password.
@@ -23,7 +23,7 @@ export function ForgotPasswordPage() {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="space-y-5 text-gray-300"
+        className="space-y-4 sm:space-y-5 text-gray-300"
       >
         <motion.div
           initial={{ opacity: 0 }}
@@ -57,7 +57,7 @@ export function ForgotPasswordPage() {
       </form>
 
       <motion.div
-        className="text-center mt-6"
+        className="text-center mt-5 sm:mt-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.25 }}

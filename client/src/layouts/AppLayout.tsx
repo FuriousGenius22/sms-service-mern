@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { AppHeader } from "@/components/app/AppHeader";
 import { AppSidebar } from "@/components/app/AppSidebar";
+import { SessionActivityTracker } from "@/components/app/SessionActivityTracker";
 
 export function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#06080f] text-white">
+      <SessionActivityTracker />
       {/* Ambient background effects matching landing page */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-indigo-600/[0.08] rounded-full blur-[120px]" />
